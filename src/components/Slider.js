@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core";
 import SliderItem from "./SliderItem";
 import Slider from "react-slick";
@@ -14,7 +14,11 @@ function Arrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", textShadow: "0px 1px 1px #757575" }}
+      style={{
+        ...style,
+        display: "block",
+        textShadow: "0px 1px 1px #757575"
+      }}
       onClick={onClick}
     />
   );
@@ -30,6 +34,9 @@ const sliderSettings = {
   slidesToShow: 3,
   nextArrow: <Arrow />,
   prevArrow: <Arrow />,
+  autoplay: true,
+  autoplaySpeed: 5000,
+  cssEase: "linear",
   responsive: [
     {
       breakpoint: 900,
@@ -54,12 +61,10 @@ const useStyles = makeStyles({
   wrapper: {
     height: "100%",
     paddingBottom: "30px",
-    paddingLeft: "30px",
-    paddingRight: "30px"
   }
 });
 
-export default function SimpleSlider() {
+function SliderComponent() {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -91,4 +96,10 @@ export default function SimpleSlider() {
       </Slider>
     </div>
   );
+}
+
+export default class SimpleSlider extends Component {
+  render() {
+    return <SliderComponent />;
+  }
 }

@@ -1,21 +1,23 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "../css/App.css";
 import { makeStyles, Container } from "@material-ui/core";
 import Header from "./Header";
 import Home from "./Home";
 import Contact from "./Contact";
 import About from "./About";
 import Footer from "./Footer";
+import NotFound from "./NotFound";
+import Blog from "./Blog";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
-    flex: 1
+    flex: 1,
+    fontFamily: theme.typography.fontFamily,
   },
-  divider: {
-    marginTop: "20px"
+  content: {
+    padding: "24px"
   }
-});
+}));
 
 export default function App() {
   const classes = useStyles();
@@ -25,12 +27,15 @@ export default function App() {
       <Router>
         <Container className={classes.container}>
           <Header />
-          <div className={classes.divider}></div>
+          <div className={classes.content}>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/blog" component={Blog} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+            <Route path='*' exact={true} component={NotFound} />
           </Switch>
+          </div>
         </Container>
         <Footer />
       </Router>

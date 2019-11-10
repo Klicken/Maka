@@ -8,7 +8,7 @@ import theme from "./theme.js"
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <App />{" "}
+    <App />
   </MuiThemeProvider>,
   document.getElementById("root")
 );
