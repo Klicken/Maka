@@ -1,9 +1,18 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import Blog from "./Blog";
+import { makeStyles, Typography } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  message: {
+    textAlign: "center",
+  }
+});
 
 export default function Home() {
+  const classes = useStyles();
+
   return (
-    <Blog/>
+    <div>
+        <Typography variant="h5" className={classes.message}>This homepage needs something huh</Typography>
+    </div>
   );
 }

@@ -40,6 +40,8 @@ const useStyles = makeStyles(theme => ({
 export default function Header() {
   const classes = useStyles();
 
+  const currentPath = window.location.pathname;
+
   const [state, setState] = React.useState({
     right: false
   });
@@ -62,11 +64,11 @@ export default function Header() {
       onClick={toggleDrawer("right", false)}
     >
       <List>
-        <ListItem button component="a" href="/about">
-          <ListItemText primary={"About"} />
-        </ListItem>
         <ListItem button component="a" href="/blog">
           <ListItemText primary={"Blog"} />
+        </ListItem>
+        <ListItem button component="a" href="/about">
+          <ListItemText primary={"About"} />
         </ListItem>
         <ListItem button component="a" href="/contact">
           <ListItemText primary={"Contact"} />
@@ -91,13 +93,28 @@ export default function Header() {
       </div>
       <Hidden xsDown>
         <div className={classes.right}>
-          <Button href="/about" size="small">
-            About
-          </Button>
-          <Button href="/blog" size="small">
+          <Button
+            href="/blog"
+            size="small"
+            color="inherit"
+            variant={currentPath === "/blog" ? "outlined" : "text"}
+          >
             Blog
           </Button>
-          <Button href="/contact" variant="outlined" size="small">
+          <Button
+            href="/about"
+            size="small"
+            color="inherit"
+            variant={currentPath === "/about" ? "outlined" : "text"}
+          >
+            About
+          </Button>
+          <Button
+            href="/contact"
+            size="small"
+            color="inherit"
+            variant={currentPath === "/contact" ? "outlined" : "text"}
+          >
             Contact
           </Button>
         </div>

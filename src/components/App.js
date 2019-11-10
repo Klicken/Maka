@@ -8,6 +8,7 @@ import About from "./About";
 import Footer from "./Footer";
 import NotFound from "./NotFound";
 import Blog from "./Blog";
+import BlogPost from "./BlogPost";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -29,11 +30,12 @@ export default function App() {
           <Header />
           <div className={classes.content}>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/blog" component={Blog} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/blog" component={Blog} />
+            <Route path="/blog/:id" component={BlogPost} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
-            <Route path='*' exact={true} component={NotFound} />
+            <Route exact path='*' component={NotFound} />
           </Switch>
           </div>
         </Container>
