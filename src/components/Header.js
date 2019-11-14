@@ -11,17 +11,17 @@ import {
   Hidden
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import logo from "../resources/logo.svg";
+import logo from "../resources/logoWithText.svg";
 
 const useStyles = makeStyles(theme => ({
   logo: {
+    width: "600px",
     display: "flex",
     textAlign: "left",
     alignItems: "center"
   },
   logoIcon: {
-    width: "40px",
-    marginRight: "10px"
+    width: "150px",
   },
   bar: {
     borderBottom: `1px solid grey`
@@ -83,12 +83,8 @@ export default function Header() {
         <Link
           href="/"
           color="inherit"
-          underline="none"
-          variant="h4"
-          className={classes.logo}
         >
           <img src={logo} alt="" className={classes.logoIcon} />
-          <b>MAKA</b>
         </Link>
       </div>
       <Hidden xsDown>
