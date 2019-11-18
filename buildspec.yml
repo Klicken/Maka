@@ -15,8 +15,9 @@ phases:
       - CI=true yarn test
 
 artifacts:
-  files:
-    - '**/*'
+  type: zip
+  paths:
+    - './build/**/*'
 
 cache:
   paths:
