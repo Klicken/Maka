@@ -39,7 +39,7 @@ export default function BlogPostCard(props) {
               {props.date}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {props.description}
+              {(props.content).substring(0, 100) + "..."}
             </Typography>
             <Typography variant="subtitle1" color="primary">
               Continue reading...

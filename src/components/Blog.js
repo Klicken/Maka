@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   Paper,
@@ -21,36 +21,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function fetchPosts() {
-  return [
-    {
-      id: 1,
-      title: "Post title 1",
-      date: "Nov 12",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content."
-    },
-    {
-      id: 2,
-      title: "Post title 2",
-      date: "Nov 11",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content."
-    },
-    {
-      id: 3,
-      title: "Post title 3",
-      date: "Nov 11",
-      description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content."
-    }
-  ];
-}
-
 export default function Blog() {
   const classes = useStyles();
 
-  const posts = fetchPosts();
+  const [posts, setPosts] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  async function fetchPosts() {
+    setIsLoading(true);
+    const res = await fetch(process.env.REACT_APP_POSTS_API_URL);
+    const posts = await res.json();
+    setPosts(posts);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <Grid container spacing={5} className={classes.mainGrid}>
@@ -59,19 +46,19 @@ export default function Blog() {
           Blog
         </Typography>
         <Divider />
-        {posts.length > 0 ? (
-          posts.map(post => (
+        {isLoading || posts == null || posts.Items === undefined ? (
+          <Typography>Oops, there are no posts here.</Typography>
+        ) : (
+          posts.Items.map(post => (
             <BlogPostCard
               className={classes.post}
               title={post.title}
               date={post.date}
-              description={post.description}
+              content={post.content}
               link={"/blog/" + post.id}
               key={post.id}
             />
           ))
-        ) : (
-          <Typography>Oops, there are no posts here</Typography>
         )}
       </Grid>
       <Grid item xs={12} md={4}>
